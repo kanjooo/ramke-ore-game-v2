@@ -17,11 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
 
-    [Header("Wall Check")]
-    public LayerMask wallLayer;
-    public float wallDistance;
-    public float wallSlideSpeed;
- 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
@@ -55,22 +50,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Wall Slide
-        if (isTouchingWall() && !isGrounded())
-        {
-            rb.AddForce(Vector3.down * wallSlideSpeed, ForceMode.VelocityChange);
-        }
         MovePlayer();
     }
 
     bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, .1f, groundLayer);
-    }
-    bool isTouchingWall()
-    {
-        return Physics.Raycast(transform.position, transform.right, wallDistance, wallLayer)
-                   || Physics.Raycast(transform.position, -transform.right, wallDistance, wallLayer);
     }
 
     private void GetInput()
