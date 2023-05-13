@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -13,12 +14,17 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         currenthp = hp;
+        healthbar.SetMaxHp(hp);
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currenthp -= damage;
         healthbar.SetHealth(currenthp);
+        if (currenthp <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void Update()

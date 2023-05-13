@@ -13,7 +13,7 @@ public class EnemyAi : MonoBehaviour
 
     //Patroling
     public Vector3 walkPoint;
-    bool walkPointSet;
+    bool walkPointSet = false;
     public float walkPointRange;
 
     //Attacking
