@@ -6,12 +6,26 @@ public class PlayerManager : MonoBehaviour
 {
     [Header("Player stats")]
     
-    public int damage;
-    private int hp;
-
-    public int health
+    public int damage = 5;
+    public int hp = 20;
+    public int currenthp;
+    public Hp_BarScript healthbar;
+    void Start()
     {
-        get { return hp; }
-        set { hp = value; }
+        currenthp = hp;
+    }
+
+    void TakeDamage(int damage)
+    {
+        currenthp -= damage;
+        healthbar.SetHealth(currenthp);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            TakeDamage(2);
+        }
     }
 }
