@@ -7,10 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-    public float groundDrag;
     public float jumpForce;
+    public float groundDrag;
     public float jumpCooldown;
     public float airMultipier;
+
     bool readyToJump = true;
 
     [Header("Ground Check")]
@@ -21,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
 
     public Transform orientation;
+    public PlayerManager playerManager;
+    
+    
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
