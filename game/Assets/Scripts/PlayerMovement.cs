@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isGrounded());
         GetInput();
         SpeedControl();
 
@@ -65,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKey(jumpKey) && readyToJump && isGrounded())
         {
-            Debug.Log("jump");
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
