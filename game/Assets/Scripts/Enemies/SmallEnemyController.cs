@@ -8,9 +8,10 @@ public class SmallEnemyController : MonoBehaviour
     //set the values in the inspector
     public Transform target; 
     public float speed;
-    public float viewRadius = 15;             
+    public float viewRadius = 15;
+    public float attackRadius = 2;
     public float viewAngle = 90;
-
+    public float recoilForce = 30f;
 
     private bool playerInSight = false;
     public LayerMask playerMask;                    //  To detect the player with the raycast
@@ -18,10 +19,17 @@ public class SmallEnemyController : MonoBehaviour
 
     Vector3 startPos;
     public NavMeshAgent agent;
+    public SmallEnemy en;
+
+    private int enDamage;
+
     private void Awake()
     {
         startPos = this.transform.position;
         agent = GetComponent<NavMeshAgent>();
+        en = GetComponent<SmallEnemy>();
+        enDamage = en.Damage;
+
     }
 
 
@@ -32,7 +40,18 @@ public class SmallEnemyController : MonoBehaviour
         //check if it is within the range you set
         if (playerInSight)
         {
-            agent.SetDestination(target.transform.position);
+           
+            float dstToPlayer = Vector3.Distance(transform.position, target.position);
+            if (dstToPlayer < attackRadius)
+            {
+                agent.isStopped = true;
+            }
+            else
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target.transform.position);
+            }
+            print(agent.isStopped);
             print("in sight");
         }
         else
@@ -65,6 +84,7 @@ public class SmallEnemyController : MonoBehaviour
                      * */
                     playerInSight = false;
                 }
+                
             }
             if (Vector3.Distance(transform.position, player.position) > viewRadius)
             {
@@ -74,6 +94,16 @@ public class SmallEnemyController : MonoBehaviour
                  * */
                 playerInSight = false;                //  Change the sate of chasing
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Player player = other.GetComponent<Player>();
+            player.TakeDamage(enDamage);
+
         }
     }
 }
