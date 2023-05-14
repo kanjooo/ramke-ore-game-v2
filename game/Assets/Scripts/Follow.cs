@@ -54,22 +54,13 @@ public class Follow : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange)
         {
-            isAttacking = true;
-            while(isAttacking)
-            {
-                escapeTimeRemaining = -Time.deltaTime;
-                agent.SetDestination(transform.position);
-                animation.Play("Attack1");
-                if (escapeTimeRemaining <= 0) { isAttacking = false; }
-                if (escapeTimeRemaining <= 0 && playerInAttackRange) { AttackPlayer();break; }
-            }
-            escapeTimeRemaining = escapeTotaltime;
+            AttackPlayer();
         }       
     }
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
-        //agent.SetDestination(transform.position);
+        agent.SetDestination(transform.position);
 
 
         transform.LookAt(player);
@@ -82,10 +73,9 @@ public class Follow : MonoBehaviour
         {
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            
+            animation.Play("Attack1");
             playerManager.TakeDamage(10);
         }
-   
     }
     private void Patroling()
     {
