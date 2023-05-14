@@ -8,7 +8,8 @@ public class KatanaController : MonoBehaviour
     public GameObject Katana;
     public bool CanAttack = true;
     public float AttackCooldown = 1.0f;
-
+    public int Damage = 5;
+    public bool IsAttacking;
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -22,6 +23,7 @@ public class KatanaController : MonoBehaviour
 
     public void KatanaAttack()
     {
+        IsAttacking = true;
         CanAttack = false;
         Animator anim = Katana.GetComponent<Animator>();
         anim.SetTrigger("Attack");
