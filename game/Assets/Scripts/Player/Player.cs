@@ -5,25 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-
     [Header("Player stats")]
     public int hp = 20;
     private int currenthp;
     public Hp_BarScript healthbar;
+ 
     void Start()
     {
         currenthp = hp;
         healthbar.SetMaxHp(hp);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "SmallEnemy")
-        {
-            SmallEnemy en = other.GetComponent<SmallEnemy>();
-            TakeDamage(en.Damage);
-
-        }
     }
     public void TakeDamage(int damage)
     {

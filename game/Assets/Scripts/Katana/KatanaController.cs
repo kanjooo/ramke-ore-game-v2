@@ -5,6 +5,7 @@ using UnityEngine;
 public class KatanaController : MonoBehaviour
 {
     public GameObject Katana;
+    public AudioSource katanaSound;
     public bool CanAttack = true;
     public float AttackCooldown = 1.0f;
     public int Damage = 5;
@@ -24,6 +25,7 @@ public class KatanaController : MonoBehaviour
     {
         IsAttacking = true;
         CanAttack = false;
+        katanaSound.Play();
         Animator anim = Katana.GetComponent<Animator>();
         anim.SetTrigger("Attack");
         StartCoroutine(ResetAttackCooldown());   
