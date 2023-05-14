@@ -7,7 +7,6 @@ public class PlayerManager : MonoBehaviour
 {
     [Header("Player stats")]
     
-    public int damage = 5;
     public int hp = 20;
     public int currenthp;
     public Hp_BarScript healthbar;
@@ -17,6 +16,15 @@ public class PlayerManager : MonoBehaviour
         healthbar.SetMaxHp(hp);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "SmallEnemy")
+        {
+            Enemy en = other.GetComponent<Enemy>();
+            TakeDamage(en.Damage);
+            
+        }
+    }
     public void TakeDamage(int damage)
     {
         currenthp -= damage;
