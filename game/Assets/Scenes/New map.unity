@@ -1563,7 +1563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e375b6492e4af3499e4b69e1e730420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   hp: 20
   currenthp: 20
   healthbar: {fileID: 24863938}
@@ -1590,7 +1589,7 @@ MonoBehaviour:
   groundCheck: {fileID: 41683365}
   jumpKey: 32
   orientation: {fileID: 236376266}
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 262491709}
 --- !u!54 &262491711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3356,6 +3355,8 @@ MonoBehaviour:
   Katana: {fileID: 670123531}
   CanAttack: 1
   AttackCooldown: 0.5
+  Damage: 5
+  IsAttacking: 0
 --- !u!1 &670123531
 GameObject:
   m_ObjectHideFlags: 0
