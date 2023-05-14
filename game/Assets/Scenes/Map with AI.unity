@@ -2054,6 +2054,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2119,6 +2123,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2612,6 +2620,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2967,6 +2979,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3917,7 +3933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2, y: -86.17171}
+  m_AnchoredPosition: {x: 2, y: -39.4}
   m_SizeDelta: {x: 194.66, y: 34.342987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581099456
@@ -5068,6 +5084,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7471,6 +7491,8 @@ MonoBehaviour:
   Katana: {fileID: 1221655619}
   CanAttack: 1
   AttackCooldown: 0.5
+  Damage: 5
+  IsAttacking: 0
 --- !u!1001 &1256153270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7941,6 +7963,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8868,7 +8894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e375b6492e4af3499e4b69e1e730420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   hp: 20
   currenthp: 20
   healthbar: {fileID: 581099457}
@@ -9473,6 +9498,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9152009896336452313, guid: e37d55d9adae8724c9dcf1dff5b67578, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: abab79a7adf5ad445bdcc8102ad68df5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9955,6 +9984,10 @@ PrefabInstance:
       propertyPath: m_Animation
       value: 
       objectReference: {fileID: 7400002, guid: ce65fa103f0e84b4289374b2a4bf93f8, type: 3}
+    - target: {fileID: 137391866070344752, guid: 227ee07e9e5b7914ba8fbb8f430be9a5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d0901b97e99da84797b3b9b6f9ef2ea, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
