@@ -17,6 +17,7 @@ public class BigEnemyControllerr : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float health;
+    public bool isChasing = false;
 
     //Patroling
     public Vector3 walkPoint;
@@ -39,7 +40,7 @@ public class BigEnemyControllerr : MonoBehaviour
         shakeCamera = player.GetComponent<CameraShake>();
     }
 
-    private void Update()
+    void FixedUpdate()
     {
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -48,8 +49,6 @@ public class BigEnemyControllerr : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
-
-        
     }
 
     private void Patroling()
@@ -82,6 +81,8 @@ public class BigEnemyControllerr : MonoBehaviour
 
     private void ChasePlayer()
     {
+        var chaseSound = gameObject.GetComponent<ChaseSound>();
+        chaseSound.playSound();
         agent.GetComponent<Animation>().Play("Run");
         agent.speed = 3;
         shakeCamera.ShakeScreen();
