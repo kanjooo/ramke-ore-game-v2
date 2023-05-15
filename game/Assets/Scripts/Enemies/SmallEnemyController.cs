@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class SmallEnemyController : MonoBehaviour
 {
     //set the values in the inspector
-    public Transform target; 
+    public Transform target;
+    CameraShake shakeCamera;
     public float speed;
     public float viewRadius = 15;
     public float attackRadius = 2;
@@ -29,7 +30,6 @@ public class SmallEnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         en = GetComponent<SmallEnemy>();
         enDamage = en.Damage;
-
     }
 
 

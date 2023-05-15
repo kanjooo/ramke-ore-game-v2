@@ -5,10 +5,10 @@ using UnityEngine;
 public class ChaseSound : MonoBehaviour
 {
     public AudioSource chaseSound;
-    public BigEnemyControllerr ghoul;
+    public TestBigEnemy ghoul;
     void Start()
     {
-        ghoul = GetComponent<BigEnemyControllerr>();
+        ghoul = GetComponent<TestBigEnemy>();
     }
 
     // Update is called once per frame
