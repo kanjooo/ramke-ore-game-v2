@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class BigEnemyControllerr : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class BigEnemyControllerr : MonoBehaviour
 
     CameraShake shakeCamera;
 
-    Animation animation;
+    public new Animation animation;
+
+    public float zOffset = 0f;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -100,6 +103,15 @@ public class BigEnemyControllerr : MonoBehaviour
 
         if (!alreadyAttacked)
         {
+            Vector3 relativePos = transform.position - player.position;
+
+            // Apply the offset to the relative position
+            relativePos += Vector3.up * 2f;
+
+            // Calculate the rotation based on the modified relative position
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            player.rotation = rotation;
+
             ///Attack code here
             var movement = player.GetComponent<FirstPersonController>();
             movement.enabled = false;
@@ -131,6 +143,5 @@ public class BigEnemyControllerr : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 
 }
