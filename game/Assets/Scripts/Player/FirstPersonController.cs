@@ -130,6 +130,7 @@ public class FirstPersonController : MonoBehaviour
     private float timer = 0;
 
     #endregion
+   
 
     private void Awake()
     {
@@ -362,6 +363,8 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
+
+
     }
 
     void FixedUpdate()
