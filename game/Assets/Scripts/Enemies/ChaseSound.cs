@@ -14,20 +14,13 @@ public class ChaseSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ghoul.playerInSightRange)
-        {;
-            chaseSound.enabled = true;
-            if (chaseSound.isPlaying)
-            {
-                // let the audio finish playing
-            }
-        }
-        else
+       
+    }
+    public void playSound()
+    {
+        if (!chaseSound.isPlaying)
         {
-            if (!chaseSound.isPlaying)
-            {
-                chaseSound.enabled = true;
-            }
+            chaseSound.Play();
         }
     }
 }
