@@ -7,14 +7,14 @@ using UnityEngine.AI;
 public class SmallEnemy : MonoBehaviour
 {
     [Header("Small enemy stats")]
-    public int hp=10;
+    public int Maxhp=10;
     public int Damage=5;
    
-    private int currenthp;
+    public int currenthp;
 
     void Start()
     {
-        currenthp = hp;
+        currenthp = Maxhp;
     }
 
     private void Update()

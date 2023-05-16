@@ -9,11 +9,11 @@ public class CollisionDetect : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        SmallEnemy en = other.GetComponent<SmallEnemy>();
+        SmallEnemy enemy = other.GetComponent<SmallEnemy>();
         if (isColiding) return;
         if (other.tag == "SmallEnemy" && weapon.IsAttacking)
         {
-            en.TakeDamage(weapon.Damage);
+            enemy.TakeDamage(weapon.Damage);
             isColiding = true;
             StartCoroutine(Reset());
         }
