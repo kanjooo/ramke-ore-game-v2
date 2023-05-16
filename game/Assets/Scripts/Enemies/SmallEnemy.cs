@@ -31,9 +31,4 @@ public class SmallEnemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
-
-
-
 }
