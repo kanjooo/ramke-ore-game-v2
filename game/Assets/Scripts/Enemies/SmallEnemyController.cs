@@ -3,134 +3,117 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class SmallEnemyController : MonoBehaviour
 {
-
+    [Header("Enemy")]
     public NavMeshAgent agent;
+    public float speed;
+    public float damage;
+    public float knockbackPower = 5f;
+    [Header("Player")]
+    public GameObject player;
+    public LayerMask playerLayer;
 
-    public Transform playerTransform;
-
-    public Player player;
-
-    Animator animator;
-
-    CameraShake shakeCamera;
-
-    public float zOffset = 0f;
-
-    public LayerMask whatIsGround, whatIsPlayer;
-
-    public float health;
-    public bool isChasing = false;
-
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
-
-    //Attacking
+    [Header("Enemy stats")]
+    public float sightRange; 
+    public float attackRange;
     public float timeBetweenAttacks;
-    bool alreadyAttacked;
 
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    [Header("Misc stuff")]
+    
+    private bool playerInSightRange, playerInAttackRange;
+    private bool alreadyAttacked = false;
+    Animator animator;
+    private Vector3 startPoint;
+    private bool isKnockbackActive = false;
+    private Vector3 knockbackDirection;
+    Player playerController;
 
-    private void Awake()
+
+    private void Start()
     {
-        playerTransform = GameObject.Find("FirstPersonController").transform;
-        player = GetComponent<Player>();
+        //Getting components
         agent = GetComponent<NavMeshAgent>();
-        shakeCamera = playerTransform.GetComponent<CameraShake>();
         animator = GetComponent<Animator>();
+        playerController = player.GetComponent<Player>();
+        //
+        startPoint = agent.transform.position;
+
+    }
+    private void Update()
+    {
+        LookForPlayer();
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            Chase();
+        }
+        if(playerInSightRange && playerInAttackRange)
+        {
+            Attack();
+        }
+        if(!playerInSightRange && !playerInAttackRange)
+        {
+            ReturnHome();
+        }
+        
+    }
+    private void ReturnHome()//
+    {
+        animator.SetBool("isChasing", false);
+        print("Returning home!");
+        agent.SetDestination(startPoint);
     }
 
-    void FixedUpdate()
+    private void LookForPlayer()
     {
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
     }
 
-    private void Patroling()
+    private void Chase()
     {
-        animator.Play("Z_Walk");
-        agent.speed = 2;
-        shakeCamera.StopShakeScreen();
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        animator.SetBool("isChasing", true);
+        print("Chasing!");
+        print(player.transform.position);
+        agent.SetDestination(player.transform.position);
     }
-    private void SearchWalkPoint()
+    private void Attack()
     {
-        //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
-    }
-
-    private void ChasePlayer()
-    {
-        animator.Play("Z_Run");
-        agent.GetComponent<Animation>().Play("Run");
-        agent.speed = 3;
-        shakeCamera.ShakeScreen();
-        agent.SetDestination(playerTransform.position);
-    }
-
-    private void AttackPlayer()
-    {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(playerTransform);
-
         if (!alreadyAttacked)
         {
-            ///Attack code here
-            animator.Play("Z_Attack");
-            player.TakeDamage(2);
-            ///End of attack code
+            print("Attacking!");
+
+            animator.SetBool("isAttacking", true);
+            // Stopping agent
+            agent.isStopped = true;
 
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            StartCoroutine(DodgeTime());
         }
+    }
+
+    private IEnumerator DodgeTime()
+    {
+        yield return new WaitForSeconds(0.5f); // Wait for 1 second
+
+        // Knockback
+        if (playerInAttackRange)
+        {
+            Rigidbody playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+            Vector3 knockbackDirection = playerRigidbody.transform.position - transform.position;
+            knockbackDirection.y = 0f; // Optional: Set the y-component to zero to prevent vertical knockback
+            playerRigidbody.AddForce(knockbackDirection.normalized * knockbackPower, ForceMode.Impulse);
+            playerController.TakeDamage(5);
+
+        }
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
     private void ResetAttack()
     {
         alreadyAttacked = false;
-    }
-
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
-
-    public void RestartSceneWithDelay(float delay)
-    {
-        StartCoroutine(RestartSceneCoroutine(delay));
-    }
-
-    private IEnumerator RestartSceneCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        agent.isStopped = false;
+        animator.SetBool("isAttacking", false);
     }
 }
