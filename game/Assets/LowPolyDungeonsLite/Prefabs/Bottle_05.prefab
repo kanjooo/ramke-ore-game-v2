@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7567921882844514395}
   - component: {fileID: 3814180899409158132}
   - component: {fileID: 1027090182464138263}
+  - component: {fileID: 3256065871575699833}
+  - component: {fileID: 338303277352966637}
   m_Layer: 0
   m_Name: Bottle_05
   m_TagString: Untagged
@@ -106,3 +108,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1f3ab9073fa6aed4bbec9d3a54b89a27, type: 3}
+--- !u!114 &3256065871575699833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374151818356740834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83392bdb64f14444bf24fe98af2446d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 11400000, guid: 4c7c1ff12f07ad547841dbfa404fd335, type: 2}
+--- !u!114 &338303277352966637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374151818356740834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8165f24d92fd9114cbb84f9f1e897c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 4c7c1ff12f07ad547841dbfa404fd335, type: 2}
